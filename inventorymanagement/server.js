@@ -59,10 +59,12 @@ app.post('/update/:productid',(req,res)=>{
     var quantity=req.body.quantity;
     var cp=req.body.costprice;
     var sp=req.body.sellingprice;
-    console.log(productid);
+    console.log(productid+" "+cp);
     db.collection('stock').deleteMany({'productid':productid});
-    db.collection('stock').insertOne({'productid':productid,'brand':brand,'category':category,'productname':productname,
+    console.log('removed existed ');
+    db.collection('stock').insert({'productid':productid,'brand':brand,'category':category,'productname':productname,
     'size':size,'quantity':quantity,'cp':cp,'sp':sp});
+    console.log('added')
     res.redirect('/');
 })
 app.get('/',(req,res)=>{
@@ -95,4 +97,4 @@ app.get('/allsales',(req,res)=>{
 })
 app.set('views',__dirname);
 app.set('view engine','ejs');
-app.listen(3000);
+app.listen(3002);
